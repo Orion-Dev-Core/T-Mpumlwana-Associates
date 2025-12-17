@@ -2,246 +2,184 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T. Mpumlwana & Associates | Legal Instruction Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>T. Mpumlwana & Associates | Consultation Booking</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap');
         
-        :root {
-            --gold: #D4AF37;
-            --dark-gold: #B8941F;
-            --deep-onyx: #1a1612;
-            --law-blue: #0c121c;
-        }
+        :root { --gold: #D4AF37; --onyx: #1a1612; --white: #ffffff; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
             font-family: 'Montserrat', sans-serif;
-            background: radial-gradient(circle at top, #2d2419 0%, var(--deep-onyx) 100%);
-            color: #f4f4f4;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        /* Subtle background watermark */
-        body::before {
-            content: 'JUSTITIA';
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-30deg);
-            font-family: 'Playfair Display';
-            font-size: 15vw;
-            opacity: 0.02;
-            pointer-events: none;
-            z-index: 0;
+            background: var(--onyx);
+            color: #333;
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.99);
-            color: #333;
-            max-width: 900px;
-            margin: 0 auto;
-            border-radius: 8px;
-            border-top: 8px solid var(--gold);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-            padding: 40px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .header { text-align: center; margin-bottom: 40px; }
-        .logo { max-width: 180px; margin-bottom: 15px; }
-        
-        h1 { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 32px; 
-            color: var(--law-blue);
-            letter-spacing: -0.5px;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
-            color: var(--dark-gold);
-            border-bottom: 1px solid #eee;
-            margin: 30px 0 20px;
-            padding-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .form-group { margin-bottom: 20px; }
-        label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 8px; color: #666; text-transform: uppercase; }
-        
-        input, textarea, select {
+            background: var(--white);
             width: 100%;
-            padding: 14px;
+            max-width: 600px;
+            border-radius: 12px;
+            padding: 30px;
+            border-top: 10px solid var(--gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .header { text-align: center; margin-bottom: 30px; }
+        .logo { max-width: 140px; margin-bottom: 10px; }
+        h1 { font-family: 'Playfair Display', serif; color: #111; font-size: 24px; margin: 0; }
+
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-size: 11px; font-weight: 600; color: #777; margin-bottom: 5px; text-transform: uppercase; }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
             border: 1px solid #ddd;
-            border-radius: 4px;
-            font-family: 'Montserrat', sans-serif;
+            border-radius: 6px;
             font-size: 15px;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        input:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 10px rgba(212,175,55,0.1); }
-
-        .service-row {
-            display: grid;
-            grid-template-columns: 3fr 1fr 1fr auto;
-            gap: 10px;
-            background: #fdfbf7;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            align-items: center;
-        }
-
-        .btn-add {
-            background: none;
-            border: 2px solid var(--gold);
-            color: var(--dark-gold);
-            padding: 10px 20px;
-            cursor: pointer;
-            font-weight: 600;
-            border-radius: 4px;
-            transition: 0.3s;
-        }
-
-        .btn-add:hover { background: var(--gold); color: white; }
-
-        .total-box {
-            background: var(--law-blue);
-            color: white;
-            padding: 20px;
-            border-radius: 4px;
-            text-align: right;
-            margin-top: 20px;
-        }
-
-        #signature-pad {
-            border: 2px dashed #ccc;
-            background: #fff;
+        #sig-canvas {
+            border: 2px dashed #D4AF37;
+            background: #fdfdfd;
             width: 100%;
-            height: 200px;
-            touch-action: none;
+            height: 180px;
+            touch-action: none; /* Prevents scrolling while signing */
+            cursor: crosshair;
         }
 
         .btn-submit {
             width: 100%;
-            padding: 20px;
+            padding: 18px;
             background: var(--gold);
             color: white;
             border: none;
-            font-size: 18px;
+            border-radius: 6px;
             font-weight: 700;
-            cursor: pointer;
-            margin-top: 30px;
+            font-size: 16px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            margin-top: 20px;
         }
 
-        @media (max-width: 600px) {
-            .service-row { grid-template-columns: 1fr; }
-            .container { padding: 20px; }
+        .btn-clear {
+            background: none;
+            border: none;
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="https://i.ibb.co/spKbVyg4/TMpumalwana.jpg" alt="Logo" class="logo">
-            <h1>Professional Instruction Portal</h1>
-            <p style="color: #888; font-size: 14px;">T. Mpumlwana & Associates | Legal Practitioners</p>
-        </div>
 
-        <form id="legal-form">
-            <div class="section-title">Client Identification</div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                <div class="form-group">
-                    <label>Full Name / Entity</label>
-                    <input type="text" id="name" required placeholder="Mandisa Mpho">
-                </div>
-                <div class="form-group">
-                    <label>Contact Number</label>
-                    <input type="tel" id="phone" required placeholder="+27...">
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" id="email" required placeholder="legal@example.com">
-            </div>
-
-            <div class="section-title">Schedule of Services</div>
-            <div id="service-container"></div>
-            <button type="button" class="btn-add" onclick="addRow()">+ Add Matter/Service</button>
-
-            <div class="total-box">
-                <span style="opacity: 0.7; font-size: 12px;">ESTIMATED TOTAL FEE</span><br>
-                <span id="display-total" style="font-size: 28px; font-family: 'Playfair Display';">R 0.00</span>
-            </div>
-
-            <div class="section-title">Authorization & Signature</div>
-            <canvas id="signature-pad"></canvas>
-            <button type="button" onclick="clearSig()" style="background:none; border:none; color:var(--gold); cursor:pointer; font-size:11px; margin-top:5px;">CLEAR SIGNATURE</button>
-
-            <button type="submit" class="btn-submit" id="submit-btn">Authorize Instruction</button>
-        </form>
+<div class="container">
+    <div class="header">
+        <img src="https://i.ibb.co/spKbVyg4/TMpumalwana.jpg" alt="TM Logo" class="logo">
+        <h1>Legal Consultation</h1>
+        <p style="font-size: 12px; color: #999;">T. Mpumlwana & Associates</p>
     </div>
 
-    <script>
-        // ... (Logic remains similar but with renamed labels for "Service" and "FEE" instead of products/price)
-        let rowCount = 0;
-        const container = document.getElementById('service-container');
+    <form id="booking-form">
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="name" required placeholder="John Doe">
+        </div>
 
-        function addRow() {
-            const id = rowCount++;
-            const div = document.createElement('div');
-            div.className = 'service-row';
-            div.innerHTML = `
-                <input type="text" placeholder="e.g. Consultation / Retainer" oninput="calc()">
-                <input type="number" placeholder="Fee (R)" class="fee" oninput="calc()">
-                <input type="number" value="1" class="qty" oninput="calc()">
-                <button type="button" onclick="this.parentElement.remove();calc()" style="color:red; background:none; border:none; cursor:pointer;">✕</button>
-            `;
-            container.appendChild(div);
-        }
+        <div class="form-group">
+            <label>WhatsApp Number</label>
+            <input type="tel" name="phone" required placeholder="+27...">
+        </div>
 
-        function calc() {
-            let total = 0;
-            document.querySelectorAll('.service-row').forEach(row => {
-                const f = row.querySelector('.fee').value || 0;
-                const q = row.querySelector('.qty').value || 0;
-                total += f * q;
-            });
-            document.getElementById('display-total').innerText = 'R ' + total.toLocaleString('en-ZA', {minimumFractionDigits: 2});
-        }
+        <div class="form-group">
+            <label>Practice Area / Service Required</label>
+            <select name="service" required>
+                <option value="">-- Select Service --</option>
+                <option value="Civil Litigation">Civil Litigation</option>
+                <option value="Family Law">Family Law & Divorce</option>
+                <option value="Criminal Defense">Criminal Defense</option>
+                <option value="Administration of Estates">Administration of Estates</option>
+                <option value="Property Law">Property Law</option>
+                <option value="Labor Law">Labor Law</option>
+            </select>
+        </div>
 
-        // Signature logic (optimized for mobile)
-        const canvas = document.getElementById('signature-pad');
-        const ctx = canvas.getContext('2d');
-        let drawing = false;
+        <div class="form-group">
+            <label>Brief Description of Matter</label>
+            <textarea name="description" rows="3" placeholder="Explain your case..."></textarea>
+        </div>
 
-        canvas.addEventListener('mousedown', () => drawing = true);
-        window.addEventListener('mouseup', () => drawing = false);
-        canvas.addEventListener('mousemove', draw);
+        <div class="form-group">
+            <label>Client Signature</label>
+            <canvas id="sig-canvas"></canvas>
+            <button type="button" class="btn-clear" onclick="clearCanvas()">Clear Signature</button>
+        </div>
 
-        function draw(e) {
-            if (!drawing) return;
-            ctx.lineWidth = 2;
-            ctx.lineCap = 'round';
-            ctx.strokeStyle = '#000';
-            const rect = canvas.getBoundingClientRect();
-            ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
-        }
+        <button type="submit" class="btn-submit">Confirm Instruction</button>
+    </form>
+</div>
 
-        function clearSig() { ctx.clearRect(0,0,canvas.width,canvas.height); ctx.beginPath(); }
+<script>
+    const canvas = document.getElementById('sig-canvas');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
 
-        addRow(); // Start with one row
-    </script>
+    // Handle Resize for canvas internal scale
+    function resize() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+    }
+    window.onload = resize;
+    window.onresize = resize;
+
+    // Drawing Logic (Mouse & Touch)
+    function start(e) { drawing = true; draw(e); }
+    function end() { drawing = false; ctx.beginPath(); }
+    
+    function draw(e) {
+        if (!drawing) return;
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = '#222';
+
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX || e.touches[0].clientX) - rect.left;
+        const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+    }
+
+    canvas.addEventListener('mousedown', start);
+    canvas.addEventListener('touchstart', (e) => { e.preventDefault(); start(e); });
+    
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e); });
+    
+    window.addEventListener('mouseup', end);
+    canvas.addEventListener('touchend', end);
+
+    function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.beginPath(); }
+
+    // Form Submission
+    document.getElementById('booking-form').onsubmit = function(e) {
+        e.preventDefault();
+        alert("Instruction Sent to T. Mpumlwana & Associates");
+        // We will wire this to your Apps Script once you are home!
+    };
+</script>
+
 </body>
 </html>
-
+ 
